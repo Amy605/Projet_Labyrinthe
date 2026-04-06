@@ -1,8 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.*;
 
 /**
  * Interface graphique (Swing) pour visualiser et résoudre le labyrinthe.
@@ -53,7 +52,7 @@ public class MazeGUI extends JFrame {
 
         // --- Panneau de contrôle (haut) ---
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 8));
-        controlPanel.setBackground(new Color(30, 30, 50));
+        controlPanel.setBackground(new Color(50, 50, 80)); // plutôt que 30,30,50
         controlPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         // Taille
@@ -272,17 +271,24 @@ public class MazeGUI extends JFrame {
         return row;
     }
 
-    private JButton styledButton(String text, Color bg) {
+   private JButton styledButton(String text, Color bg) {
         JButton btn = new JButton(text);
+        
+        // IMPORTANT : Ces deux lignes permettent de voir la couleur de fond
         btn.setBackground(bg);
-        btn.setForeground(Color.WHITE);
+        btn.setOpaque(true);
+        btn.setContentAreaFilled(true); // Force le remplissage de la couleur
+        
+        btn.setForeground(Color.WHITE); // Texte en blanc
         btn.setFocusPainted(false);
+        btn.setBorderPainted(false);    // Supprime le cadre blanc par défaut
+        
         btn.setFont(new Font("SansSerif", Font.BOLD, 12));
-        btn.setBorder(BorderFactory.createEmptyBorder(6, 12, 6, 12));
-        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btn.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         return btn;
     }
-
     private JLabel styledLabel(String text) {
         JLabel label = new JLabel(text);
         label.setForeground(new Color(200, 200, 220));

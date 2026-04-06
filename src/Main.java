@@ -1,17 +1,8 @@
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.*;
 
-/**
- * Point d'entrée du programme de résolution de labyrinthe.
- * Lance en mode console (avec menu interactif) ou GUI selon l'argument.
- *
- * Usage :
- *   java Main           → Mode console interactif
- *   java Main --gui     → Interface graphique
- *
- * @author Étudiant 3 (intégration)
- */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -125,13 +116,17 @@ public class Main {
     }
 
     // ──────────────────────────────────────────────────────────
-    //  MODE GUI
+    //  MODE GUI (CORRIGÉ)
     // ──────────────────────────────────────────────────────────
     private static void launchGUI() {
         SwingUtilities.invokeLater(() -> {
             try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception ignored) {}
+                // On utilise le style "CrossPlatform" au lieu de "System" 
+                // pour permettre la coloration personnalisée des boutons.
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            } catch (Exception e) {
+                System.err.println("Impossible de charger le Look and Feel");
+            }
             new MazeGUI();
         });
     }
